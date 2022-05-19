@@ -1,12 +1,28 @@
 import React from 'react';
 
 const Home = () => {
+
+    const handelSubmit = (e) => {
+        e.preventDefault()
+        const task = e.target.task.value
+        const newTask = {task}
+
+        fetch('http://localhost:5000/userTask', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newTask)
+        })
+    }
     return (
         <div className='text-center mt-16 px-24'>
-            <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
-            <button className='btn btn-primary'>Add</button>
+            <form onSubmit={handelSubmit} action="">
+            <input name='task' type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+            <input type='submit' value='submit' className='btn btn-primary'/>
+            </form>
             <div class="overflow-x-auto">
-  <table class="table w-full mx-auto mt-20">
+    <table class="table w-full mx-auto mt-20">
     <thead>
       <tr>
         <th></th>
